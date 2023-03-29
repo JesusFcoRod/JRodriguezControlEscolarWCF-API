@@ -229,6 +229,8 @@
     <Content Include="Views\Materia\Modal.cshtml" />
     <Content Include="Views\AlumnoMateria\AlumnoGetAll.cshtml" />
     <Content Include="Views\AlumnoMateria\Modal.cshtml" />
+    <Content Include="Views\AlumnoMateria\MateriasAsignadasByAlumno.cshtml" />
+    <Content Include="Views\AlumnoMateria\MateriasNoAsignadasByAlumno.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -108,6 +108,9 @@
     <Compile Include="MateriasAsignadasGetByIdAlumno_Result.cs">
       <DependentUpon>JRodriguezControlEscolarNCapas.tt</DependentUpon>
     </Compile>
+    <Compile Include="MateriasNoAsignadasByIdAlumno_Result.cs">
+      <DependentUpon>JRodriguezControlEscolarNCapas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

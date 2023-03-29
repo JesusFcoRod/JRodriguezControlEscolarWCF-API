@@ -1,0 +1,60 @@
+﻿@model ML.AlumnoMateria
+@{
+    ViewBag.Title = "MateriasNoAsignadasByAlumno";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <h2>MATERIAS</h2>
+    </div>
+
+    <div class="row">
+        @using (Html.BeginForm("MateriasNoAsignadasByAlumno", "AlumnoMateria", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            if (Model.AlumnoMaterias != null)
+            {
+                
+                <table class="table table-bordered table-responsive table-hover" id="tblUsuario">
+                    <thead>
+                        <tr>
+                            <td class="text-center" style=" font-weight:bold;">Agregar</td>
+
+                            <td class="text-center" style=" font-weight:bold;">Nombre</td>
+                            <td class="text-center" style=" font-weight:bold;">Costo</td>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (ML.Materia alumnoMateria in Model.AlumnoMaterias)
+                        {
+                            <tr>
+                                <td class="text-center"><input class="form-check-input" type="checkbox" value=@alumnoMateria.idMateria name="AlumnoMaterias"></td>
+
+                                <td>@alumnoMateria.Nombre</td>
+                                <td>@alumnoMateria.Costo</td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+            }
+            else
+            {
+                <div class="alert alert-danger" role="alert">Ocurrio un error al realizar la consulta </div>
+            }
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><i class="fa-solid fa-bookmark" style="color:green"></i></span>
+                        <input type="submit" value="Guardar" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -31,10 +31,17 @@
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
           <Parameter Name="Costo" Type="decimal" Mode="In" />
         </Function>
+        <Function Name="addMateriasByIdAlumno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idAlumno" Type="int" Mode="In" />
+          <Parameter Name="idMateria" Type="int" Mode="In" />
+        </Function>
         <Function Name="DeleteAlumno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idAlumno" Type="int" Mode="In" />
         </Function>
         <Function Name="DeleteMateria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idMateria" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteMateriaAsignada" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idMateria" Type="int" Mode="In" />
         </Function>
         <Function Name="GetAllAlumno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -46,6 +53,9 @@
           <Parameter Name="idMateria" Type="int" Mode="In" />
         </Function>
         <Function Name="MateriasAsignadasGetByIdAlumno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idAlumno" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MateriasNoAsignadasByIdAlumno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idAlumno" Type="int" Mode="In" />
         </Function>
         <Function Name="UpdateAlumno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -122,7 +132,17 @@
             <Parameter Name="Costo" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="MateriasAsignadasGetByIdAlumno" ReturnType="Collection(ControlEscolarModel.MateriasAsignadasGetByIdAlumno_Result)">
+          <Parameter Name="idAlumno" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteMateriaAsignada">
+          <Parameter Name="idMateria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MateriasNoAsignadasByIdAlumno" ReturnType="Collection(ControlEscolarModel.MateriasNoAsignadasByIdAlumno_Result)">
+          <Parameter Name="idAlumno" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="addMateriasByIdAlumno">
             <Parameter Name="idAlumno" Mode="In" Type="Int32" />
+            <Parameter Name="idMateria" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetAllAlumno_Result">
@@ -149,6 +169,12 @@
         </ComplexType>
         <ComplexType Name="MateriasAsignadasGetByIdAlumno_Result">
           <Property Type="Int32" Name="idAlumnos" Nullable="false" />
+          <Property Type="Int32" Name="idMateria" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Costo" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="MateriasNoAsignadasByIdAlumno_Result">
+          <Property Type="Int32" Name="idMateria" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
           <Property Type="Decimal" Name="Costo" Nullable="true" Precision="18" Scale="2" />
         </ComplexType>
@@ -225,11 +251,23 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="ControlEscolarModel.MateriasAsignadasGetByIdAlumno_Result">
                 <ScalarProperty Name="idAlumnos" ColumnName="idAlumnos" />
+                <ScalarProperty Name="idMateria" ColumnName="idMateria" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Costo" ColumnName="Costo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeleteMateriaAsignada" FunctionName="ControlEscolarModel.Store.DeleteMateriaAsignada" />
+          <FunctionImportMapping FunctionImportName="MateriasNoAsignadasByIdAlumno" FunctionName="ControlEscolarModel.Store.MateriasNoAsignadasByIdAlumno">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ControlEscolarModel.MateriasNoAsignadasByIdAlumno_Result">
+                <ScalarProperty Name="idMateria" ColumnName="idMateria" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="addMateriasByIdAlumno" FunctionName="ControlEscolarModel.Store.addMateriasByIdAlumno" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

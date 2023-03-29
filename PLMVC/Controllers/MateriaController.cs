@@ -160,6 +160,9 @@ namespace PLMVC.Controllers
             }
             catch (Exception ex)
             {
+                result.Correct = true;
+                result.ErrorMessage = ex.Message;
+                result.Exception = ex;
 
             }
             return View(materia);

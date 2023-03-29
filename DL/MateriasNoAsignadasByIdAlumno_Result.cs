@@ -11,9 +11,8 @@ namespace DL
 {
     using System;
     
-    public partial class MateriasAsignadasGetByIdAlumno_Result
+    public partial class MateriasNoAsignadasByIdAlumno_Result
     {
-        public int idAlumnos { get; set; }
         public int idMateria { get; set; }
         public string Nombre { get; set; }
         public Nullable<decimal> Costo { get; set; }

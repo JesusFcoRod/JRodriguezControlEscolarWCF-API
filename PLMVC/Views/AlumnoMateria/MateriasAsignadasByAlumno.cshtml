@@ -1,0 +1,88 @@
+﻿@model ML.Materia
+
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>MATERIAS</h2>
+
+@using (Html.BeginForm("MateriasNoAsignadasByAlumno", "AlumnoMateria", FormMethod.Get, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+
+        <div class="col-md-1" style="display: none;">
+            @Html.TextBoxFor(model => model.Alumno.idAlumno, new { @class = "hidden form-control", autocomplete = "off" })
+        </div>
+
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.Alumno.Nombre, "Alumno:")
+            <div class="input-group mb-2">
+                <span class="input-group-text"><i class="bi bi-controller"></i></span>
+                @Html.TextBoxFor(model => model.Alumno.Nombre, new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.Alumno.ApellidoPaterno, " ")
+            <div class="input-group mb-2">
+                <span class="input-group-text"><i class="bi bi-controller"></i></span>
+                @Html.TextBoxFor(model => model.Alumno.ApellidoPaterno, new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.Alumno.ApellidoMaterno, " ")
+            <div class="input-group mb-2">
+                <span class="input-group-text"><i class="bi bi-controller"></i></span>
+                @Html.TextBoxFor(model => model.Alumno.ApellidoMaterno, new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+
+        <div style="float:right;">
+            <div class="row">
+                <div class="glyphicon-up">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <input type="submit" value="Agregar Materias" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+<table class="table table-hover table-striped table-bordered table-responsive" id="table_usuarios">
+    <thead>
+        <tr class="table-secondary">
+            <td>Eliminar</td>
+            <td style="display :none;">id</td>
+            <td>Nombre Materia</td>
+            <td>Costo</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (ML.Materia materia in Model.Materias)
+        {
+            <tr>
+                <td style="text-align: center; vertical-align: middle;"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("DeleteMateriaAsignada", "AlumnoMateria", new { idMateria = materia.idMateria})"><i class="bi bi-pencil-square" style="color: ivory"></i></a></td>
+                <td style="display :none;"> </td>
+                <td>@materia.Nombre</td>
+                <td>@materia.Costo</td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
